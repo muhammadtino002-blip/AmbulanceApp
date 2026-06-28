@@ -18,13 +18,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.ui.theme.Montserrat
 
-// ── Color tokens ───────────────────────────────────────────────────────────────
+// Color tokens
 private val NavyDark = Color(0xFF1A2847)
 private val TextMain = Color(0xFF1A1A1A)
 private val TextSub  = Color(0xFF5A5A5A)
 
-// ── Screen ─────────────────────────────────────────────────────────────────────
+// Screen
 @Composable
 fun OrderSuccessScreen(
     onBackToDashboardClick: () -> Unit = {}
@@ -36,14 +37,14 @@ fun OrderSuccessScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 32.dp),
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // ── Center content (vertically centered slightly above mid) ─────
+            // Center content (vertically centered slightly above mid)
             Spacer(modifier = Modifier.weight(0.45f))
 
-            // ── Checkmark circle ───────────────────────────────────────────
+            // Checkmark circle
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
@@ -64,32 +65,35 @@ fun OrderSuccessScreen(
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // ── Headline ───────────────────────────────────────────────────
+            // Headline
             Text(
                 text = "Order Successfully\nConfirmed",
-                fontSize = 22.sp,
+                fontFamily = Montserrat,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 color = TextMain,
                 textAlign = TextAlign.Center,
-                lineHeight = 30.sp
+                lineHeight = 25.sp
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // ── Body copy ──────────────────────────────────────────────────
+            // Body copy
             Text(
                 text = "Your order confirmation has been shipped. " +
                         "We will notify you once the fleet begins moving " +
                         "to the pickup location.",
-                fontSize = 14.sp,
+                fontFamily = Montserrat,
+                fontSize = 12.sp,
+                fontWeight = FontWeight.Medium,
                 color = TextSub,
                 textAlign = TextAlign.Center,
-                lineHeight = 22.sp
+                lineHeight = 20.sp
             )
 
             Spacer(modifier = Modifier.weight(0.55f))
 
-            // ── Back To Dashboard button ───────────────────────────────────
+            // Back To Dashboard button
             Button(
                 onClick = onBackToDashboardClick,
                 modifier = Modifier
@@ -100,6 +104,7 @@ fun OrderSuccessScreen(
             ) {
                 Text(
                     text = "Back To Dashboard",
+                    fontFamily = Montserrat,
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
@@ -111,7 +116,7 @@ fun OrderSuccessScreen(
     }
 }
 
-// ── Preview ────────────────────────────────────────────────────────────────────
+// Preview
 @Preview(showBackground = true, widthDp = 390, heightDp = 844)
 @Composable
 fun OrderSuccessScreenPreview() {

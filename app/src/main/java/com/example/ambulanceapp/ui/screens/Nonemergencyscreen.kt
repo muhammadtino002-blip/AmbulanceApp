@@ -50,7 +50,10 @@ private val tbOptions        = listOf("Yes", "No", "Unknown")
 
 // Root Screen
 @Composable
-fun NonEmergencyScreen(onBack: () -> Unit = {}) {
+fun NonEmergencyScreen(
+    onBack: () -> Unit = {},
+    onOrderSubmitted: () -> Unit ,
+) {
     // Form state
     var name              by remember { mutableStateOf("") }
     var age               by remember { mutableStateOf("") }
@@ -356,7 +359,7 @@ fun NonEmergencyScreen(onBack: () -> Unit = {}) {
 
                 // CTA Button
                 Button(
-                    onClick  = { /* TODO: submit order */ },
+                    onClick  = { onOrderSubmitted() },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(54.dp),
@@ -492,6 +495,9 @@ private fun MapPlaceholderView() {
 @Composable
 fun NonEmergencyScreenPreview() {
     MaterialTheme {
-        NonEmergencyScreen()
+        NonEmergencyScreen(
+            onBack = { },
+            onOrderSubmitted = { }
+        )
     }
 }

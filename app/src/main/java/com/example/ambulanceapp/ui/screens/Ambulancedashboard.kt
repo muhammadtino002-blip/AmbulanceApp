@@ -35,7 +35,6 @@ private val NavyDark      = Color(0xFF122850)
 private val NavyLight     = Color(0xFF2B4E8C)
 private val White         = Color(0xFFFFFFFF)
 private val Black         = Color(0xFF000000)
-private val OffWhite      = Color(0xFFF5F5F5)
 private val TextPrimary   = Color(0xFF111827)
 private val TextSecondary = Color(0xFF6B7280)
 private val CardBg        = Color(0xFFFFFFFF)
@@ -85,27 +84,21 @@ fun AmbulanceDashboardScreen(
         )
     )
 
-    Scaffold(
-        containerColor = OffWhite,
-        bottomBar = { BottomNavBar(selectedNavItem) { selectedNavItem = it } }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(bottom = innerPadding.calculateBottomPadding())
-        ) {
-            HeroHeader(onTapHere = onNavigateToNonEmergency)
-            Spacer(Modifier.height(24.dp))
-            SectionHeader("Service Category", onViewAll = {})
-            Spacer(Modifier.height(12.dp))
-            ServiceCategoryGrid(serviceCategories)
-            Spacer(Modifier.height(28.dp))
-            SectionHeader("Latest News", onViewAll = {})
-            Spacer(Modifier.height(12.dp))
-            LatestNewsRow(latestNews)
-            Spacer(Modifier.height(24.dp))
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
+        HeroHeader(onTapHere = onNavigateToNonEmergency)
+        Spacer(Modifier.height(24.dp))
+        SectionHeader("Service Category", onViewAll = {})
+        Spacer(Modifier.height(12.dp))
+        ServiceCategoryGrid(serviceCategories)
+        Spacer(Modifier.height(28.dp))
+        SectionHeader("Latest News", onViewAll = {})
+        Spacer(Modifier.height(12.dp))
+        LatestNewsRow(latestNews)
+        Spacer(Modifier.height(24.dp))
     }
 }
 
@@ -400,61 +393,6 @@ private fun NewsCard(news: NewsItem) {
                 color = White.copy(alpha = 0.70f),
                 fontFamily = Montserrat,
                 fontSize = 10.sp
-            )
-        }
-    }
-}
-
-// Bottom Nav
-private data class NavItem(
-    val selectedIcon: ImageVector,
-    val unselectedIcon: ImageVector,
-    val label: String
-)
-
-private val navItems = listOf(
-    NavItem(
-        Icons.Filled.Home,
-        unselectedIcon = Icons.Outlined.Home,
-        "Home"
-    ),
-    NavItem(
-        Icons.Filled.Schedule,
-        unselectedIcon = Icons.Outlined.Schedule,
-        "History"
-    ),
-    NavItem(
-        Icons.Filled.Chat,
-        unselectedIcon = Icons.Outlined.Chat,
-        "Messages"
-    ),
-    NavItem(
-        Icons.Filled.Person,
-        unselectedIcon = Icons.Outlined.Person,
-        "Profile"
-    )
-)
-
-@Composable
-private fun BottomNavBar(selectedIndex: Int, onItemSelected: (Int) -> Unit) {
-    NavigationBar(containerColor = White, tonalElevation = 0.dp) {
-        navItems.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = selectedIndex == index,
-                onClick  = { onItemSelected(index) },
-                icon     = {
-                    val isSelected = selectedIndex == index
-                    Icon(
-                        imageVector = if (isSelected) item.selectedIcon else item.unselectedIcon,
-                        item.label,
-                        modifier = Modifier.size(35.dp)
-                    ) },
-                colors   = NavigationBarItemDefaults.colors(
-                    selectedIconColor   = NavyPrimary,
-                    unselectedIconColor = TextSecondary,
-                    indicatorColor      = Color.Transparent
-                ),
-                alwaysShowLabel = false
             )
         }
     }

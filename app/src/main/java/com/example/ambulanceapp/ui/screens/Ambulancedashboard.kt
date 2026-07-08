@@ -111,7 +111,8 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
             .clip(RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp))
             .background(Brush.verticalGradient(colors = listOf(NavyDark, NavyPrimary, NavyLight)))
             .padding(horizontal = 20.dp)
-            .padding(top = 48.dp, bottom = 28.dp)
+            .padding(bottom = 28.dp)
+            .statusBarsPadding()
     ) {
         Column {
             // Top bar

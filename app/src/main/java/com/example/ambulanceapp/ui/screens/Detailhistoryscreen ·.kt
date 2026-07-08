@@ -3,6 +3,7 @@ package com.example.ambulanceapp.ui.screens
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,8 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.ui.theme.Montserrat
 
-// ── Color tokens ───────────────────────────────────────────────────────────────
+// Color tokens
 private val ScreenBg  = Color(0xFFF2F2F2)
 private val CardBg    = Color(0xFFFFFFFF)
 private val NavyDark  = Color(0xFF1A2847)
@@ -31,7 +33,7 @@ private val TextLabel = Color(0xFF8A8A8A)
 private val Divider   = Color(0xFFE0E0E0)
 private val MapBg     = Color(0xFFD6E4C7)   // placeholder tint for map area
 
-// ── Data model ─────────────────────────────────────────────────────────────────
+// Data model
 data class DetailHistoryData(
     val name: String          = "Suyatno Indrawan",
     val age: String           = "59 Year Old",
@@ -44,7 +46,7 @@ data class DetailHistoryData(
     val additionalCondition: String = "-"
 )
 
-// ── Screen ─────────────────────────────────────────────────────────────────────
+// Screen
 @Composable
 fun DetailHistoryScreen(
     title: String = "Non-Emergency",
@@ -61,12 +63,13 @@ fun DetailHistoryScreen(
                 .verticalScroll(rememberScrollState())
         ) {
 
-            // ── Top bar ────────────────────────────────────────────────────
+            // Top bar
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(ScreenBg)
-                    .padding(horizontal = 8.dp, vertical = 16.dp)
+                    .statusBarsPadding()
+                    .padding(horizontal = 8.dp)
             ) {
                 IconButton(
                     onClick = onBackClick,
@@ -76,11 +79,14 @@ fun DetailHistoryScreen(
                         imageVector = Icons.Default.ArrowBackIosNew,
                         contentDescription = "Back",
                         tint = TextMain,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier
+                            .size(16.dp)
+                            .clickable{ (onBackClick) }
                     )
                 }
                 Text(
                     text = title,
+                    fontFamily = Montserrat,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextMain,
@@ -90,7 +96,7 @@ fun DetailHistoryScreen(
 
             Spacer(modifier = Modifier.height(4.dp))
 
-            // ── Detail card ────────────────────────────────────────────────
+            // Detail card
             Card(
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(containerColor = CardBg),
@@ -130,7 +136,7 @@ fun DetailHistoryScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // ── Map placeholder ────────────────────────────────────
+                    // Map placeholder
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -143,6 +149,7 @@ fun DetailHistoryScreen(
                         Text(
                             text = "Map View",
                             color = Color.Gray,
+                            fontFamily = Montserrat,
                             fontSize = 13.sp
                         )
                     }
@@ -156,7 +163,7 @@ fun DetailHistoryScreen(
     }
 }
 
-// ── Single detail row with divider ─────────────────────────────────────────────
+// Single detail row with divider
 @Composable
 private fun DetailRow(
     label: String,
@@ -175,6 +182,7 @@ private fun DetailRow(
         // Label (left)
         Text(
             text = label,
+            fontFamily = Montserrat,
             fontSize = 14.sp,
             color = TextLabel,
             fontWeight = FontWeight.Normal,
@@ -187,6 +195,7 @@ private fun DetailRow(
         // Value (right)
         Text(
             text = value,
+            fontFamily = Montserrat,
             fontSize = 14.sp,
             color = TextMain,
             fontWeight = valueWeight,
@@ -201,7 +210,7 @@ private fun DetailRow(
     }
 }
 
-// ── Preview ────────────────────────────────────────────────────────────────────
+// Preview
 @Preview(showBackground = true, widthDp = 390, heightDp = 844)
 @Composable
 fun DetailHistoryScreenPreview() {

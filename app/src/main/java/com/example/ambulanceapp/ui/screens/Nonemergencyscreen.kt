@@ -43,6 +43,7 @@ private val TextSecondary   = Color(0xFF6B7280)
 private val BorderColor     = Color(0xFFE5E7EB)
 private val SelectedDateBg  = NavyPrimary
 private val UnselectedDateBg = Color(0xFFEEEEEE)
+private val MapBg     = Color(0xFFD6E4C7)
 
 // Data
 private val conditionOptions = listOf("Stable", "Critical", "Unknown")
@@ -114,7 +115,6 @@ fun NonEmergencyScreen(
                         color      = TextPrimary
                     )
                     Spacer(Modifier.weight(1f))
-                    Spacer(Modifier.size(36.dp))
                 }
 
                 // Add Location button
@@ -478,11 +478,22 @@ private fun MapPlaceholderView() {
             .fillMaxSize()
             .background(Color(0xFFE8EDF3))
     ) {
-        Image(
-            painter = painterResource(com.example.ambulanceapp.R.drawable.maps),
-            contentDescription = "maps",
-            modifier = Modifier.fillMaxSize()
-        )
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(250.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(MapBg),
+            contentAlignment = Alignment.Center
+        ) {
+            
+            Text(
+                text = "Map View",
+                color = Color.Gray,
+                fontFamily = Montserrat,
+                fontSize = 13.sp
+            )
+        }
     }
 }
 

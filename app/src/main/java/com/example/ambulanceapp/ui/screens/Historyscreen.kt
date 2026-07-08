@@ -1,23 +1,16 @@
 package com.example.ambulanceapp.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material.icons.filled.Chat
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Schedule
 import androidx.compose.material.icons.outlined.AirlineSeatFlat
-import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.Emergency
-import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.MedicalServices
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -47,7 +40,7 @@ data class OrderHistoryItem(
 // Screen
 @Composable
 fun HistoryScreen(
-    onItemClick: (OrderHistoryItem) -> Unit = {},
+    onItemClick: (OrderHistoryItem) -> Unit = {}
 ) {
     var selectedNavItem by remember { mutableIntStateOf(0) }
 
@@ -80,6 +73,7 @@ fun HistoryScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
+            .statusBarsPadding(),
     ) {
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -137,11 +131,11 @@ private fun HistoryCard(
     onClick: () -> Unit
 ) {
     Card(
-        onClick = onClick,
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = CardBg),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth(),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

@@ -10,6 +10,8 @@ import com.example.ambulanceapp.ui.screens.HistoryScreen
 import com.example.ambulanceapp.ui.screens.MainScreen
 import com.example.ambulanceapp.ui.screens.NonEmergencyScreen
 import com.example.ambulanceapp.ui.screens.OrderSuccessScreen
+import com.example.ambulanceapp.ui.screens.SignInScreen
+import com.example.ambulanceapp.ui.screens.SignUpScreen
 import com.example.ambulanceapp.ui.screens.SplashScreen
 
 @Composable
@@ -24,9 +26,31 @@ fun AmbulanceNavGraph(
         composable(route = Screen.Splash.route) {
             SplashScreen(
                 onSplashComplete = {
-                    navController.navigate(Screen.Dashboard.route) {
+                    navController.navigate(Screen.SignIn.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
+                }
+            )
+        }
+
+        composable(route = Screen.SignIn.route) {
+            SignInScreen(
+                onSignInClick = {
+                    navController.navigate(Screen.Dashboard.route)
+                },
+                onSignUpClick = {
+                    navController.navigate(Screen.SignUp.route)
+                }
+            )
+        }
+
+        composable(route = Screen.SignUp.route) {
+            SignUpScreen(
+                onSignUpClick = {
+                    navController.navigate(Screen.Dashboard.route)
+                },
+                onBackClick = {
+                    navController.navigate(Screen.SignIn.route)
                 }
             )
         }
@@ -71,6 +95,8 @@ fun AmbulanceNavGraph(
 
 sealed class Screen(val route: String) {
     object Splash        : Screen("splash")
+    object SignIn        : Screen("signin")
+    object SignUp        : Screen("signup")
     object Dashboard     : Screen("dashboard")
     object NonEmergency  : Screen("non_emergency")
     object OrderSuccsess : Screen("order_succsess")

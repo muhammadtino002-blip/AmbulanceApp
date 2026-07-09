@@ -25,17 +25,18 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.ui.theme.Montserrat
 
-// ── Color tokens ──────────────────────────────────────────────────────────────
-private val NavyDark   = Color(0xFF1A2847)   // primary button & icon bg
-private val NavyMid    = Color(0xFF3B5998)   // icon circle accent
-private val FieldBg    = Color(0xFFF0F0F0)   // input field background
-private val HintGray   = Color(0xFF9E9E9E)   // placeholder text
-private val TextMain   = Color(0xFF1A1A1A)   // headings
-private val TextSub    = Color(0xFF6B6B6B)   // secondary / footnote
-private val LinkColor  = NavyDark            // "Forgot Password" & "Sign Up"
+// Color tokens
+private val NavyDark   = Color(0xFF1A2847)
+private val NavyMid    = Color(0xFF3B5998)
+private val FieldBg    = Color(0xFFF0F0F0)
+private val HintGray   = Color(0xFF9E9E9E)
+private val TextMain   = Color(0xFF1A1A1A)
+private val TextSub    = Color(0xFF6B6B6B)
+private val LinkColor  = NavyDark
 
-// ── Screen ────────────────────────────────────────────────────────────────────
+// Screen
 @Composable
 fun SignInScreen(
     onSignInClick: () -> Unit = {},
@@ -57,20 +58,20 @@ fun SignInScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // ── Top spacer (≈ 35 % of screen height) ──────────────────────
             Spacer(modifier = Modifier.weight(0.35f))
 
-            // ── Title ──────────────────────────────────────────────────────
+            // Title
             Text(
                 text = "Sign In",
                 fontSize = 26.sp,
+                fontFamily = Montserrat,
                 fontWeight = FontWeight.Bold,
                 color = TextMain
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // ── E-mail field ───────────────────────────────────────────────
+            // E-mail field
             InputField(
                 value = email,
                 onValueChange = { email = it },
@@ -90,7 +91,7 @@ fun SignInScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // ── Password field ─────────────────────────────────────────────
+            // Password field
             InputField(
                 value = password,
                 onValueChange = { password = it },
@@ -121,7 +122,7 @@ fun SignInScreen(
                 keyboardType = KeyboardType.Password
             )
 
-            // ── Forgot Password ────────────────────────────────────────────
+            // Forgot Password
             Box(
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.CenterEnd
@@ -131,6 +132,7 @@ fun SignInScreen(
                         text = "Forgot Password",
                         color = LinkColor,
                         fontSize = 13.sp,
+                        fontFamily = Montserrat,
                         fontWeight = FontWeight.Normal
                     )
                 }
@@ -138,7 +140,7 @@ fun SignInScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // ── Sign In button ─────────────────────────────────────────────
+            // Sign In button
             Button(
                 onClick = onSignInClick,
                 modifier = Modifier
@@ -150,22 +152,30 @@ fun SignInScreen(
                 Text(
                     text = "Sign In",
                     fontSize = 16.sp,
+                    fontFamily = Montserrat,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
             }
 
-            // ── Bottom spacer ──────────────────────────────────────────────
             Spacer(modifier = Modifier.weight(0.65f))
 
-            // ── Sign Up footnote ───────────────────────────────────────────
+            // Sign Up footnote
             TextButton(onClick = onSignUpClick) {
                 Text(
                     text = buildAnnotatedString {
-                        withStyle(SpanStyle(color = TextSub, fontWeight = FontWeight.Normal)) {
+                        withStyle(SpanStyle(
+                            color = TextSub,
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Normal
+                        )) {
                             append("Don't have an account? ")
                         }
-                        withStyle(SpanStyle(color = LinkColor, fontWeight = FontWeight.Bold)) {
+                        withStyle(SpanStyle(
+                            color = LinkColor,
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Bold
+                        )) {
                             append("Sign Up")
                         }
                     },
@@ -179,7 +189,7 @@ fun SignInScreen(
     }
 }
 
-// ── Reusable: rounded input field ─────────────────────────────────────────────
+// Reusable: rounded input field
 @Composable
 private fun InputField(
     value: String,
@@ -194,7 +204,12 @@ private fun InputField(
         value = value,
         onValueChange = onValueChange,
         placeholder = {
-            Text(text = placeholder, color = HintGray, fontSize = 14.sp)
+            Text(
+                text = placeholder,
+                color = HintGray,
+                fontFamily = Montserrat,
+                fontSize = 14.sp
+            )
         },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
@@ -219,7 +234,7 @@ private fun InputField(
     )
 }
 
-// ── Reusable: colored circle that wraps an icon ────────────────────────────────
+// Reusable: colored circle that wraps an icon
 @Composable
 private fun IconCircle(content: @Composable () -> Unit) {
     Surface(
@@ -233,7 +248,7 @@ private fun IconCircle(content: @Composable () -> Unit) {
     }
 }
 
-// ── Preview ────────────────────────────────────────────────────────────────────
+// Preview
 @Preview(showBackground = true, widthDp = 390, heightDp = 844)
 @Composable
 fun SignInScreenPreview() {

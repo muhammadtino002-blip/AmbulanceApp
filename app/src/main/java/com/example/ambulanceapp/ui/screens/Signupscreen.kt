@@ -23,8 +23,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.ui.theme.Montserrat
 
-// ── Color tokens (shared with SignInScreen) ────────────────────────────────────
+// Color token
 private val NavyDark  = Color(0xFF1A2847)
 private val NavyMid   = Color(0xFF3B5998)
 private val FieldBg   = Color(0xFFF0F0F0)
@@ -33,7 +34,7 @@ private val TextMain  = Color(0xFF1A1A1A)
 private val TextSub   = Color(0xFF6B6B6B)
 private val CheckBlue = Color(0xFF3B5998)
 
-// ── Screen ─────────────────────────────────────────────────────────────────────
+// Screen
 @Composable
 fun SignUpScreen(
     onBackClick: () -> Unit = {},
@@ -43,7 +44,7 @@ fun SignUpScreen(
     var email           by remember { mutableStateOf("") }
     var password        by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
-    var termsAccepted   by remember { mutableStateOf(true) }   // checked by default (matches design)
+    var termsAccepted   by remember { mutableStateOf(true) }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -55,7 +56,7 @@ fun SignUpScreen(
                 .padding(horizontal = 24.dp)
         ) {
 
-            // ── Back arrow ─────────────────────────────────────────────────
+            // Back arrow
             Spacer(modifier = Modifier.height(56.dp))
             IconButton(
                 onClick = onBackClick,
@@ -69,13 +70,14 @@ fun SignUpScreen(
                 )
             }
 
-            // ── Top spacer ─────────────────────────────────────────────────
+            // Top spacer
             Spacer(modifier = Modifier.height(60.dp))
 
-            // ── Title ──────────────────────────────────────────────────────
+            // Title
             Text(
                 text = "Sign Up",
                 fontSize = 26.sp,
+                fontFamily = Montserrat,
                 fontWeight = FontWeight.Bold,
                 color = TextMain,
                 modifier = Modifier.align(Alignment.CenterHorizontally)
@@ -83,7 +85,7 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // ── Username field ─────────────────────────────────────────────
+            // Username field
             SignUpInputField(
                 value = username,
                 onValueChange = { username = it },
@@ -102,7 +104,7 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // ── E-mail field ───────────────────────────────────────────────
+            // E-mail field
             SignUpInputField(
                 value = email,
                 onValueChange = { email = it },
@@ -122,7 +124,7 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // ── Password field ─────────────────────────────────────────────
+            // Password field
             SignUpInputField(
                 value = password,
                 onValueChange = { password = it },
@@ -155,7 +157,7 @@ fun SignUpScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // ── Terms & Conditions checkbox ────────────────────────────────
+            // Terms & Conditions checkbox
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
@@ -174,13 +176,14 @@ fun SignUpScreen(
                 Text(
                     text = "I agree to the terms & conditions",
                     fontSize = 13.sp,
+                    fontFamily = Montserrat,
                     color = TextSub
                 )
             }
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // ── Sign Up button ─────────────────────────────────────────────
+            // Sign Up button
             Button(
                 onClick = onSignUpClick,
                 modifier = Modifier
@@ -192,6 +195,7 @@ fun SignUpScreen(
                 Text(
                     text = "Sign Up",
                     fontSize = 16.sp,
+                    fontFamily = Montserrat,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
@@ -200,7 +204,7 @@ fun SignUpScreen(
     }
 }
 
-// ── Reusable: rounded input field ──────────────────────────────────────────────
+// Reusable: rounded input field
 @Composable
 private fun SignUpInputField(
     value: String,
@@ -215,7 +219,12 @@ private fun SignUpInputField(
         value = value,
         onValueChange = onValueChange,
         placeholder = {
-            Text(text = placeholder, color = HintGray, fontSize = 14.sp)
+            Text(
+                text = placeholder,
+                color = HintGray,
+                fontFamily = Montserrat,
+                fontSize = 14.sp
+            )
         },
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
@@ -240,7 +249,7 @@ private fun SignUpInputField(
     )
 }
 
-// ── Reusable: colored circle that wraps an icon ────────────────────────────────
+// Reusable: colored circle that wraps an icon
 @Composable
 private fun IconCircle(content: @Composable () -> Unit) {
     Surface(
@@ -254,7 +263,7 @@ private fun IconCircle(content: @Composable () -> Unit) {
     }
 }
 
-// ── Preview ────────────────────────────────────────────────────────────────────
+// Preview
 @Preview(showBackground = true, widthDp = 390, heightDp = 844)
 @Composable
 fun SignUpScreenPreview() {

@@ -42,6 +42,7 @@ private val bottomNavItems = listOf(
 @Composable
 fun MainScreen(
     onNavigateToNonEmergency: () -> Unit = {},
+    onNavigateToEmergency: () -> Unit,
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showOptimizationDialog by remember { mutableStateOf(false) }

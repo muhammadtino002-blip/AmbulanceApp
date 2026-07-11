@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.ambulanceapp.ui.screen.EmergencyScreen
 import com.example.ambulanceapp.ui.screens.DetailHistoryScreen
 import com.example.ambulanceapp.ui.screens.HistoryScreen
 import com.example.ambulanceapp.ui.screens.MainScreen
@@ -59,6 +60,9 @@ fun AmbulanceNavGraph(
             MainScreen(
                 onNavigateToNonEmergency = {
                     navController.navigate(Screen.NonEmergency.route)
+                },
+                onNavigateToEmergency = {
+                    navController.navigate(Screen.emergency.route)
                 }
             )
         }
@@ -71,6 +75,16 @@ fun AmbulanceNavGraph(
                 }
             )
         }
+
+        composable(route = Screen.emergency.route) {
+            EmergencyScreen(
+                onBack = { navController.popBackStack() },
+                onOrderSubmitted = {
+                    navController.navigate(Screen.OrderSuccsess.route)
+                }
+            )
+        }
+
 
         composable(route = Screen.OrderSuccsess.route) {
             OrderSuccessScreen(
@@ -99,6 +113,7 @@ sealed class Screen(val route: String) {
     object SignUp        : Screen("signup")
     object Dashboard     : Screen("dashboard")
     object NonEmergency  : Screen("non_emergency")
+    object emergency     : Screen("emergency")
     object OrderSuccsess : Screen("order_succsess")
     object HistoryScreen : Screen("history_screen")
     object DetailHistory : Screen("detail_history")

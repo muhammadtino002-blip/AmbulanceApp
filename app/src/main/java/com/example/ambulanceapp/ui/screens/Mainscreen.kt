@@ -42,7 +42,7 @@ private val bottomNavItems = listOf(
 @Composable
 fun MainScreen(
     onNavigateToNonEmergency: () -> Unit = {},
-    onNavigateToEmergency: () -> Unit,
+    onNavigateToEmergency: () -> Unit
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showOptimizationDialog by remember { mutableStateOf(false) }
@@ -104,40 +104,28 @@ fun MainScreen(
             // Tab content swap
             when (selectedTab) {
                 0 -> AmbulanceDashboardScreen(
-                    onNavigateToNonEmergency = onNavigateToNonEmergency
+                    onNavigateToNonEmergency = onNavigateToNonEmergency,
+                    onNavigateToEmergency = onNavigateToEmergency
                 )
                 1 -> HistoryScreen()
-                else -> AmbulanceDashboardScreen(onNavigateToNonEmergency = onNavigateToNonEmergency)
+                else -> AmbulanceDashboardScreen ( onNavigateToEmergency = onNavigateToEmergency,
+                    onNavigateToNonEmergency = onNavigateToNonEmergency )
             }
         }
     }
 }
 
-// Placeholder for unbuilt tabs
-//@Composable
-//private fun PlaceholderScreen(title: String) {
-//    Box(
-//        modifier            = Modifier.fillMaxSize(),
-//        contentAlignment    = androidx.compose.ui.Alignment.Center
-//    ) {
-//        Text(
-//            text       = title,
-//            fontSize   = 20.sp,
-//            fontWeight = FontWeight.SemiBold,
-//            color      = TextSecondary
-//        )
-//    }
-//}
-
 // Preview
 @Preview(
-    name           = "Main Screen – Home tab",
+    name           = "Main Screen",
     showBackground = true,
     device         = "spec:width=390dp,height=844dp,dpi=430"
 )
 @Composable
 fun MainScreenPreview() {
     MaterialTheme {
-        MainScreen()
+//        MainScreen(
+//
+//        )
     }
 }

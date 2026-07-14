@@ -1,7 +1,6 @@
 package com.example.ambulanceapp.ui.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,13 +33,14 @@ data class OrderHistoryItem(
     val type: String,
     val driver: String,
     val dateTime: String,
-    val icon: ImageVector
+    val icon: ImageVector,
+    val onClick: () -> Unit
 )
 
 // Screen
 @Composable
 fun HistoryScreen(
-    onItemClick: (OrderHistoryItem) -> Unit = {}
+    onNavigateToDetail: () -> Unit = {}
 ) {
     var selectedNavItem by remember { mutableIntStateOf(0) }
 
@@ -49,13 +49,15 @@ fun HistoryScreen(
             type = "Non-Emergency",
             driver = "Maulana Malik",
             dateTime = "27 June 2026 - 12:39",
-            icon = Icons.Outlined.MedicalServices
+            icon = Icons.Outlined.MedicalServices,
+            onClick = onNavigateToDetail
         ),
         OrderHistoryItem(
             type = "Corpse",
             driver = "Supriyadi",
             dateTime = "8 June 2026 - 07:12",
-            icon = Icons.Outlined.AirlineSeatFlat
+            icon = Icons.Outlined.AirlineSeatFlat,
+            onClick = {}
         )
     )
 
@@ -64,7 +66,8 @@ fun HistoryScreen(
             type = "Emergency",
             driver = "Joko Anwar",
             dateTime = "9 May 2026 - 17:02",
-            icon = Icons.Outlined.Emergency
+            icon = Icons.Outlined.Emergency,
+            onClick = {}
         )
     )
 
@@ -94,7 +97,7 @@ fun HistoryScreen(
         SectionLabel("This Month")
         Spacer(modifier = Modifier.height(12.dp))
         thisMonthItems.forEach { item ->
-            HistoryCard(item = item, onClick = { onItemClick(item) })
+            HistoryCard(item = item, onClick = {  })
             Spacer(modifier = Modifier.height(12.dp))
         }
 
@@ -104,7 +107,7 @@ fun HistoryScreen(
         SectionLabel("May 2026")
         Spacer(modifier = Modifier.height(12.dp))
         mayItems.forEach { item ->
-            HistoryCard(item = item, onClick = { onItemClick(item) })
+            HistoryCard(item = item, onClick = {  })
             Spacer(modifier = Modifier.height(12.dp))
         }
 
@@ -134,6 +137,7 @@ private fun HistoryCard(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = CardBg),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+        onClick = { onClick },
         modifier = Modifier
             .fillMaxWidth(),
     ) {

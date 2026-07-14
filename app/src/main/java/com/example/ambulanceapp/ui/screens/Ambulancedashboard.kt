@@ -56,13 +56,15 @@ data class NewsItem(
 // ROOT SCREEN
 @Composable
 fun AmbulanceDashboardScreen(
-    onNavigateToNonEmergency: () -> Unit = {}
+    onNavigateToEmergency: () -> Unit = {},
+    onNavigateToNonEmergency: () -> Unit = {},
 ) {
     var selectedNavItem by remember { mutableIntStateOf(0) }
 
     // Build category list here so we can inject the callback
     val serviceCategories = listOf(
-        ServiceCategory(Icons.Outlined.Emergency,         "Emergency"),
+        ServiceCategory(Icons.Outlined.Emergency,         "Emergency",
+            onClick = onNavigateToEmergency),
         ServiceCategory(Icons.Outlined.MedicalServices, "Non-\nEmergency",
             onClick = onNavigateToNonEmergency),
         ServiceCategory(Icons.Outlined.AirlineSeatFlat,     "Corpse"),
@@ -164,23 +166,19 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
             Spacer(Modifier.height(16.dp))
 
             // Search bar
-            Row(
+            var searchQuery by remember { mutableStateOf("") }
+
+            TextField(
+                value = searchQuery,
+                onValueChange = { searchQuery = it },
+                placeholder = { Text("Search", color = TextSecondary, fontSize = 14.sp) },
+                leadingIcon = {
+                    Icon(Icons.Filled.Search, contentDescription = "Search", tint = TextSecondary, modifier = Modifier.size(20.dp))
+                },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(30.dp))
-                    .background(White)
-                    .padding(horizontal = 14.dp, vertical = 12.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    Icons.Filled.Search,
-                    "Search",
-                    tint = TextSecondary,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(Modifier.width(10.dp))
-                Text("Search", color = TextSecondary, fontSize = 14.sp)
-            }
+                    .clip(RoundedCornerShape(30.dp)),
+            )
 
             Spacer(Modifier.height(16.dp))
 
@@ -403,5 +401,7 @@ private fun NewsCard(news: NewsItem) {
 @Preview(name = "Dashboard", showBackground = true, device = "spec:width=390dp,height=844dp,dpi=430")
 @Composable
 fun AmbulanceDashboardPreview() {
-    MaterialTheme { AmbulanceDashboardScreen() }
+    MaterialTheme {
+        AmbulanceDashboardScreen()
+    }
 }

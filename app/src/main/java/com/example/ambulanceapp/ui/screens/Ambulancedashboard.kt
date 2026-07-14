@@ -198,7 +198,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
                         lineHeight = 25.sp
                     )
                     Text(
-                        "For emergency situations",
+                        "For Non-emergency situations",
                         color = White.copy(alpha = 0.75f),
                         fontFamily = Montserrat,
                         fontSize = 12.sp,

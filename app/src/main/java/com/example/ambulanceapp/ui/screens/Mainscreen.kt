@@ -104,12 +104,14 @@ fun MainScreen(
             // Tab content swap
             when (selectedTab) {
                 0 -> AmbulanceDashboardScreen(
+                    onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,
-                    onNavigateToEmergency = onNavigateToEmergency
                 )
                 1 -> HistoryScreen()
-                else -> AmbulanceDashboardScreen ( onNavigateToEmergency = onNavigateToEmergency,
-                    onNavigateToNonEmergency = onNavigateToNonEmergency )
+                else -> AmbulanceDashboardScreen (
+                    onNavigateToEmergency = onNavigateToEmergency,
+                    onNavigateToNonEmergency = onNavigateToNonEmergency,
+                )
             }
         }
     }

@@ -61,14 +61,36 @@ fun AmbulanceDashboardScreen(
 ) {
     var selectedNavItem by remember { mutableIntStateOf(0) }
 
+    // State dialog dipindahkan ke atas SEBELUM dipakai di serviceCategories
+    var showScheduleDialog by remember { mutableStateOf(false) }
+    var showCorpseDialog by remember { mutableStateOf(false) }
+
     // Build category list here so we can inject the callback
     val serviceCategories = listOf(
-        ServiceCategory(Icons.Outlined.Emergency,         "Emergency",
-            onClick = onNavigateToEmergency),
-        ServiceCategory(Icons.Outlined.MedicalServices, "Non-\nEmergency",
-            onClick = onNavigateToNonEmergency),
-        ServiceCategory(Icons.Outlined.AirlineSeatFlat,     "Corpse"),
-        ServiceCategory(Icons.Outlined.CalendarMonth,   "Schedule")
+        ServiceCategory(
+            Icons.Outlined.Emergency,
+            "Emergency",
+            onClick = onNavigateToEmergency
+        ),
+        ServiceCategory(
+            Icons.Outlined.MedicalServices,
+            "Non-\nEmergency",
+            onClick = onNavigateToNonEmergency
+        ),
+        ServiceCategory(
+            Icons.Outlined.AirlineSeatFlat,
+            "Corpse",
+            onClick = {
+                showCorpseDialog = true
+            }
+        ),
+        ServiceCategory(
+            Icons.Outlined.CalendarMonth,
+            "Schedule",
+            onClick = {
+                showScheduleDialog = true
+            }
+        )
     )
 
     val latestNews = listOf(
@@ -102,11 +124,41 @@ fun AmbulanceDashboardScreen(
         LatestNewsRow(latestNews)
         Spacer(Modifier.height(24.dp))
     }
+
+    // Dialog untuk Corpse
+    if (showCorpseDialog) {
+        AlertDialog(
+            onDismissRequest = { showCorpseDialog = false },
+            title = { Text("Corpse") },
+            text = { Text("maaf corpse belum tersedia") },
+            confirmButton = {
+                TextButton(onClick = { showCorpseDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+
+    // Dialog untuk Schedule
+    if (showScheduleDialog) {
+        AlertDialog(
+            onDismissRequest = { showScheduleDialog = false },
+            title = { Text("Schedule") },
+            text = { Text("maaf schedule belum tersedia") },
+            confirmButton = {
+                TextButton(onClick = { showScheduleDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 }
 
 // HERO HEADER
 @Composable
 private fun HeroHeader(onTapHere: () -> Unit = {}) {
+    var showNotificationDialog by remember { mutableStateOf(false) }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -153,10 +205,11 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
                         .size(40.dp)
                         .clip(CircleShape)
                         .background(White)
-                        .clickable { },
+                        .clickable { showNotificationDialog = true },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(Icons.Outlined.Notifications, "Notifications",
+                    Icon(
+                        Icons.Outlined.Notifications, "Notifications",
                         tint = Black,
                         modifier = Modifier.size(22.dp)
                     )
@@ -240,6 +293,18 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
             }
         }
     }
+    if (showNotificationDialog) {
+        AlertDialog(
+            onDismissRequest = { showNotificationDialog = false },
+            title = { Text("Notifikasi") },
+            text = { Text("Belum Ada Notifikasi") },
+            confirmButton = {
+                TextButton(onClick = { showNotificationDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
 }
 
 // Section Header
@@ -256,7 +321,6 @@ private fun SectionHeader(title: String, onViewAll: () -> Unit) {
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             color = TextPrimary
-
         )
         Row(
             modifier = Modifier.clickable { onViewAll() },

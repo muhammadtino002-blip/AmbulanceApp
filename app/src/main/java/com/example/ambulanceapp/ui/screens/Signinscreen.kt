@@ -5,8 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
@@ -39,13 +39,26 @@ private val LinkColor  = NavyDark
 // Screen
 @Composable
 fun SignInScreen(
-    onSignInClick: () -> Unit = {},
+    onSignInClick: (username: String, password: String) -> Unit = { _, _ -> },
     onForgotPasswordClick: () -> Unit = {},
     onSignUpClick: () -> Unit = {}
 ) {
-    var email by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    fun handleSignIn() {
+        errorMessage = when {
+            username.isBlank() -> "Username tidak boleh kosong"
+            password.isBlank() -> "Password tidak boleh kosong"
+            password.length < 6 -> "Password minimal 6 karakter"
+            else -> null
+        }
+        if (errorMessage == null) {
+            onSignInClick(username, password)
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -71,22 +84,25 @@ fun SignInScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // E-mail field
+            // Username field
             InputField(
-                value = email,
-                onValueChange = { email = it },
-                placeholder = "E-mail",
+                value = username,
+                onValueChange = {
+                    username = it
+                    errorMessage = null
+                },
+                placeholder = "Username",
                 leadingIcon = {
                     IconCircle {
                         Icon(
-                            imageVector = Icons.Default.Email,
-                            contentDescription = "Email icon",
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Username icon",
                             tint = Color.White,
                             modifier = Modifier.size(18.dp)
                         )
                     }
                 },
-                keyboardType = KeyboardType.Email
+                keyboardType = KeyboardType.Text
             )
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -94,7 +110,10 @@ fun SignInScreen(
             // Password field
             InputField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {
+                    password = it
+                    errorMessage = null
+                },
                 placeholder = "Password",
                 leadingIcon = {
                     IconCircle {
@@ -122,6 +141,24 @@ fun SignInScreen(
                 keyboardType = KeyboardType.Password
             )
 
+            // Pesan error
+            if (errorMessage != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Text(
+                        text = errorMessage ?: "",
+                        color = Color(0xFFDC2626),
+                        fontSize = 12.sp,
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
+
             // Forgot Password
             Box(
                 modifier = Modifier.fillMaxWidth(),
@@ -142,7 +179,7 @@ fun SignInScreen(
 
             // Sign In button
             Button(
-                onClick = onSignInClick,
+                onClick = { handleSignIn() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),

@@ -36,11 +36,11 @@ fun AmbulanceNavGraph(
 
         composable(route = Screen.SignIn.route) {
             SignInScreen(
-                onSignInClick = {
-                    navController.navigate(Screen.Dashboard.route)
+                onSignInClick = { username, password ->
+                    navController.navigate(route = Screen.Dashboard.route)
                 },
                 onSignUpClick = {
-                    navController.navigate(Screen.SignUp.route)
+                    navController.navigate(route = Screen.SignUp.route)
                 }
             )
         }

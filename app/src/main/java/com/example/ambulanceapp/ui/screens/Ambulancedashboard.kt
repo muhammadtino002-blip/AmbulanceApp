@@ -28,18 +28,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
-
-// Design Tokens
-private val NavyPrimary   = Color(0xFF1A3A6B)
-private val NavyDark      = Color(0xFF122850)
-private val NavyLight     = Color(0xFF2B4E8C)
-private val White         = Color(0xFFFFFFFF)
-private val Black         = Color(0xFF000000)
-private val TextPrimary   = Color(0xFF111827)
-private val TextSecondary = Color(0xFF6B7280)
-private val CardBg        = Color(0xFFFFFFFF)
-private val IconBg        = Color(0xFFF3F4F6)
-private val OverlayDark   = Color(0x99000000)
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.NavySecondary
+import com.example.ambulanceapp.ui.theme.White
+import com.example.ambulanceapp.ui.theme.Black
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
+import com.example.ambulanceapp.ui.theme.CardBg
+import com.example.ambulanceapp.ui.theme.IconBg
+import com.example.ambulanceapp.ui.theme.OverlayDark
 
 // Data Models
 data class ServiceCategory(
@@ -59,7 +56,6 @@ fun AmbulanceDashboardScreen(
     onNavigateToEmergency: () -> Unit = {},
     onNavigateToNonEmergency: () -> Unit = {},
 ) {
-    var selectedNavItem by remember { mutableIntStateOf(0) }
 
     // State dialog dipindahkan ke atas SEBELUM dipakai di serviceCategories
     var showScheduleDialog by remember { mutableStateOf(false) }
@@ -163,7 +159,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp))
-            .background(Brush.verticalGradient(colors = listOf(NavyDark, NavyPrimary, NavyLight)))
+            .background(Brush.verticalGradient(colors = listOf(NavyPrimary, NavySecondary)))
             .padding(horizontal = 20.dp)
             .padding(bottom = 28.dp)
             .statusBarsPadding()
@@ -430,7 +426,7 @@ private fun NewsCard(news: NewsItem) {
     ) {
         Box(
             modifier = Modifier.fillMaxSize()
-                .background(Brush.linearGradient(colors = listOf(NavyDark, NavyLight)))
+                .background(Brush.linearGradient(colors = listOf(NavyPrimary, NavySecondary)))
         )
         Box(
             modifier = Modifier
@@ -462,7 +458,7 @@ private fun NewsCard(news: NewsItem) {
 }
 
 // Preview
-@Preview(name = "Dashboard", showBackground = true, device = "spec:width=390dp,height=844dp,dpi=430")
+@Preview(showBackground = true, device = "spec:width=390dp,height=844dp,dpi=430")
 @Composable
 fun AmbulanceDashboardPreview() {
     MaterialTheme {

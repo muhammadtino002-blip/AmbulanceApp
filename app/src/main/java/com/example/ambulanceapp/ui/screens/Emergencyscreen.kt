@@ -22,36 +22,24 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.Canvas
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.StrokeJoin
-import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.drawscope.rotate
 import com.example.ambulanceapp.ui.theme.Montserrat
-
-// Design Tokens
-private val NavyPrimary    = Color(0xFF1A3A6B)
-private val NavyDark       = Color(0xFF122850)
-private val Red            = Color(0xFFCC1A1A)
-private val RedDark        = Color(0xFF9B1414)
-private val RedLight       = Color(0xFFE53935)
-private val White          = Color(0xFFFFFFFF)
-private val OffWhite       = Color(0xFFF5F7FA)
-private val TextPrimary    = Color(0xFF111827)
-private val TextSecondary  = Color(0xFF6B7280)
-private val BorderColor    = Color(0xFFE5E7EB)
-private val CardBg         = Color(0xFFFFFFFF)
-private val MapBg     = Color(0xFFD6E4C7)
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
+import com.example.ambulanceapp.ui.theme.CardBg
+import com.example.ambulanceapp.ui.theme.MapBg
+import com.example.ambulanceapp.ui.theme.White
+import com.example.ambulanceapp.ui.theme.Red
+import com.example.ambulanceapp.ui.theme.RedDark
+import com.example.ambulanceapp.ui.theme.RedLight
+import com.example.ambulanceapp.ui.theme.OffWhite
+import com.example.ambulanceapp.ui.theme.BorderColor
 
 // Data
 private val statusOptions = listOf("Chest Pain", "Difficulty Breathing", "Injury", "Other")

@@ -19,11 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.components.UnderOptimizationDialog
-
-// Design Tokens
-private val NavyPrimary   = Color(0xFF1A3A6B)
-private val White         = Color(0xFFFFFFFF)
-private val TextSecondary = Color(0xFF6B7280)
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.White
+import com.example.ambulanceapp.ui.theme.TextSecondary
 
 // Bottom Nav Items
 private data class BottomNavItem(
@@ -42,11 +40,11 @@ private val bottomNavItems = listOf(
 @Composable
 fun MainScreen(
     onNavigateToNonEmergency: () -> Unit = {},
-    onNavigateToEmergency: () -> Unit
+    onNavigateToEmergency: () -> Unit = {}
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showOptimizationDialog by remember { mutableStateOf(false) }
-    // Show popup when needed
+
     if (showOptimizationDialog) {
         UnderOptimizationDialog(onDismiss = { showOptimizationDialog = false })
     }
@@ -107,7 +105,7 @@ fun MainScreen(
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,
                 )
-                1 -> HistoryScreen()
+                1 -> HistoryScreen(onNavigateToDetail = {})
                 else -> AmbulanceDashboardScreen (
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,

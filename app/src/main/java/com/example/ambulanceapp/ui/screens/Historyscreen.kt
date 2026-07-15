@@ -42,7 +42,6 @@ data class OrderHistoryItem(
 fun HistoryScreen(
     onNavigateToDetail: () -> Unit = {}
 ) {
-    var selectedNavItem by remember { mutableIntStateOf(0) }
 
     val thisMonthItems = listOf(
         OrderHistoryItem(

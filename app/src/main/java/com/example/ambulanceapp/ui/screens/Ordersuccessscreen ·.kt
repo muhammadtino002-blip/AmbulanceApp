@@ -19,11 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
-
-// Color tokens
-private val NavyDark = Color(0xFF1A2847)
-private val TextMain = Color(0xFF1A1A1A)
-private val TextSub  = Color(0xFF5A5A5A)
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
 
 // Screen
 @Composable
@@ -51,14 +49,14 @@ fun OrderSuccessScreen(
                     .size(96.dp)
                     .border(
                         width = 3.dp,
-                        color = NavyDark,
+                        color = NavyPrimary,
                         shape = CircleShape
                     )
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Check,
                     contentDescription = "Order confirmed",
-                    tint = NavyDark,
+                    tint = NavyPrimary,
                     modifier = Modifier.size(48.dp)
                 )
             }
@@ -71,7 +69,7 @@ fun OrderSuccessScreen(
                 fontFamily = Montserrat,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = TextMain,
+                color = TextPrimary,
                 textAlign = TextAlign.Center,
                 lineHeight = 25.sp
             )
@@ -86,7 +84,7 @@ fun OrderSuccessScreen(
                 fontFamily = Montserrat,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Medium,
-                color = TextSub,
+                color = TextSecondary,
                 textAlign = TextAlign.Center,
                 lineHeight = 20.sp
             )
@@ -100,7 +98,7 @@ fun OrderSuccessScreen(
                     .fillMaxWidth()
                     .height(54.dp),
                 shape = RoundedCornerShape(50),
-                colors = ButtonDefaults.buttonColors(containerColor = NavyDark)
+                colors = ButtonDefaults.buttonColors(containerColor = NavyPrimary)
             ) {
                 Text(
                     text = "Back To Dashboard",

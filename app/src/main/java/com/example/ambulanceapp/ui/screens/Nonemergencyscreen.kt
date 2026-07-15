@@ -1,6 +1,5 @@
 package com.example.ambulanceapp.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -21,29 +20,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.White
+import com.example.ambulanceapp.ui.theme.OffWhite
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
+import com.example.ambulanceapp.ui.theme.HintGray
+import com.example.ambulanceapp.ui.theme.BorderColor
+import com.example.ambulanceapp.ui.theme.MapBg
+import com.example.ambulanceapp.ui.theme.UnselectedBg
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
-
-// Design Tokens
-private val NavyPrimary     = Color(0xFF1A3A6B)
-private val White           = Color(0xFFFFFFFF)
-private val OffWhite        = Color(0xFFF7F7F7)
-private val TextPrimary     = Color(0xFF111827)
-private val TextHint        = Color(0xFF9CA3AF)
-private val TextSecondary   = Color(0xFF6B7280)
-private val BorderColor     = Color(0xFFE5E7EB)
-private val SelectedDateBg  = NavyPrimary
-private val UnselectedDateBg = Color(0xFFEEEEEE)
-private val MapBg     = Color(0xFFD6E4C7)
 
 // Data
 private val conditionOptions = listOf("Stable", "Critical", "Unknown")
@@ -235,8 +230,8 @@ fun NonEmergencyScreen(
                                     .size(40.dp)
                                     .clip(CircleShape)
                                     .background(
-                                        if (isSelected) SelectedDateBg
-                                        else UnselectedDateBg
+                                        if (isSelected) NavyPrimary
+                                        else UnselectedBg
                                     ),
                                 contentAlignment = Alignment.Center
                             ) {
@@ -337,7 +332,7 @@ fun NonEmergencyScreen(
                     placeholder   = {
                         Text(
                             text     = "Additional Information (more detailed condition, first aid measures already taken, etc.)",
-                            color    = TextHint,
+                            color    = HintGray,
                             fontSize = 13.sp,
                             lineHeight = 18.sp
                         )
@@ -394,7 +389,7 @@ private fun FormTextField(
         placeholder   = {
             Text(
                 text = placeholder,
-                color = TextHint,
+                color = HintGray,
                 fontSize = 12.sp
             )
         },
@@ -438,7 +433,7 @@ private fun FormDropdown(
         ) {
             Text(
                 text     = value.ifEmpty { placeholder },
-                color    = if (value.isEmpty()) TextHint else TextPrimary,
+                color    = if (value.isEmpty()) HintGray else TextPrimary,
                 fontFamily = Montserrat,
                 fontSize = 12.sp
             )

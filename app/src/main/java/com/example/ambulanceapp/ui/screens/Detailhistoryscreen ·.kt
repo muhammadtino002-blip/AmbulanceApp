@@ -16,22 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
-
-// Color tokens
-private val ScreenBg  = Color(0xFFF2F2F2)
-private val CardBg    = Color(0xFFFFFFFF)
-private val NavyDark  = Color(0xFF1A2847)
-private val TextMain  = Color(0xFF1A1A1A)
-private val TextLabel = Color(0xFF8A8A8A)
-private val Divider   = Color(0xFFE0E0E0)
-private val MapBg     = Color(0xFFD6E4C7)   // placeholder tint for map area
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
+import com.example.ambulanceapp.ui.theme.CardBg
+import com.example.ambulanceapp.ui.theme.MapBg
+import com.example.ambulanceapp.ui.theme.ScreenBg
+import com.example.ambulanceapp.ui.theme.HintGray
 
 // Data model
 data class DetailHistoryData(
@@ -78,7 +74,7 @@ fun DetailHistoryScreen(
                     Icon(
                         imageVector = Icons.Default.ArrowBackIosNew,
                         contentDescription = "Back",
-                        tint = TextMain,
+                        tint = TextPrimary,
                         modifier = Modifier
                             .size(16.dp)
                             .clickable{ (onBackClick) }
@@ -89,7 +85,7 @@ fun DetailHistoryScreen(
                     fontFamily = Montserrat,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
-                    color = TextMain,
+                    color = TextPrimary,
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
@@ -184,7 +180,7 @@ private fun DetailRow(
             text = label,
             fontFamily = Montserrat,
             fontSize = 14.sp,
-            color = TextLabel,
+            color = TextSecondary,
             fontWeight = FontWeight.Normal,
             modifier = Modifier.width(110.dp),
             lineHeight = 20.sp
@@ -197,7 +193,7 @@ private fun DetailRow(
             text = value,
             fontFamily = Montserrat,
             fontSize = 14.sp,
-            color = TextMain,
+            color = TextPrimary,
             fontWeight = valueWeight,
             textAlign = valueAlign,
             lineHeight = 20.sp,
@@ -206,7 +202,7 @@ private fun DetailRow(
     }
 
     if (showDivider) {
-        HorizontalDivider(color = Divider, thickness = 0.8.dp)
+        HorizontalDivider(color = HintGray, thickness = 0.8.dp)
     }
 }
 

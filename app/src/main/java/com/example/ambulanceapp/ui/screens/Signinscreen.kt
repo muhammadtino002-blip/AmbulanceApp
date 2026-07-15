@@ -26,15 +26,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
-
-// Color tokens
-private val NavyDark   = Color(0xFF1A2847)
-private val NavyMid    = Color(0xFF3B5998)
-private val FieldBg    = Color(0xFFF0F0F0)
-private val HintGray   = Color(0xFF9E9E9E)
-private val TextMain   = Color(0xFF1A1A1A)
-private val TextSub    = Color(0xFF6B6B6B)
-private val LinkColor  = NavyDark
+import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.NavySecondary
+import com.example.ambulanceapp.ui.theme.NavyTertiary
+import com.example.ambulanceapp.ui.theme.TextPrimary
+import com.example.ambulanceapp.ui.theme.TextSecondary
+import com.example.ambulanceapp.ui.theme.HintGray
+import com.example.ambulanceapp.ui.theme.FieldBg
 
 // Screen
 @Composable
@@ -79,7 +77,7 @@ fun SignInScreen(
                 fontSize = 26.sp,
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.Bold,
-                color = TextMain
+                color = TextPrimary
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -167,7 +165,7 @@ fun SignInScreen(
                 TextButton(onClick = onForgotPasswordClick) {
                     Text(
                         text = "Forgot Password",
-                        color = LinkColor,
+                        color = NavyPrimary,
                         fontSize = 13.sp,
                         fontFamily = Montserrat,
                         fontWeight = FontWeight.Normal
@@ -184,7 +182,7 @@ fun SignInScreen(
                     .fillMaxWidth()
                     .height(54.dp),
                 shape = RoundedCornerShape(50),
-                colors = ButtonDefaults.buttonColors(containerColor = NavyDark)
+                colors = ButtonDefaults.buttonColors(containerColor = NavySecondary)
             ) {
                 Text(
                     text = "Sign In",
@@ -202,14 +200,14 @@ fun SignInScreen(
                 Text(
                     text = buildAnnotatedString {
                         withStyle(SpanStyle(
-                            color = TextSub,
+                            color = TextSecondary,
                             fontFamily = Montserrat,
                             fontWeight = FontWeight.Normal
                         )) {
                             append("Don't have an account? ")
                         }
                         withStyle(SpanStyle(
-                            color = LinkColor,
+                            color = NavyPrimary,
                             fontFamily = Montserrat,
                             fontWeight = FontWeight.Bold
                         )) {
@@ -261,9 +259,9 @@ private fun InputField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-            cursorColor = NavyDark,
-            focusedTextColor = TextMain,
-            unfocusedTextColor = TextMain
+            cursorColor = NavyPrimary,
+            focusedTextColor = TextPrimary,
+            unfocusedTextColor = TextPrimary
         ),
         modifier = Modifier
             .fillMaxWidth()
@@ -276,7 +274,7 @@ private fun InputField(
 private fun IconCircle(content: @Composable () -> Unit) {
     Surface(
         shape = RoundedCornerShape(50),
-        color = NavyMid,
+        color = NavyTertiary,
         modifier = Modifier.size(34.dp)
     ) {
         Box(contentAlignment = Alignment.Center) {

@@ -105,7 +105,7 @@ fun MainScreen(
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,
                 )
-                1 -> HistoryScreen(onNavigateToDetail = {})
+                1 -> HistoryScreen()
                 else -> AmbulanceDashboardScreen (
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,

@@ -39,9 +39,7 @@ data class OrderHistoryItem(
 
 // Screen
 @Composable
-fun HistoryScreen(
-    onNavigateToDetail: () -> Unit = {}
-) {
+fun HistoryScreen() {
 
     val thisMonthItems = listOf(
         OrderHistoryItem(
@@ -49,7 +47,7 @@ fun HistoryScreen(
             driver = "Maulana Malik",
             dateTime = "27 June 2026 - 12:39",
             icon = Icons.Outlined.MedicalServices,
-            onClick = onNavigateToDetail
+            onClick = {}
         ),
         OrderHistoryItem(
             type = "Corpse",

@@ -37,6 +37,7 @@ import com.example.ambulanceapp.ui.theme.MapBg
 import com.example.ambulanceapp.ui.theme.UnselectedBg
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -63,14 +64,21 @@ fun NonEmergencyScreen(
     var phone             by remember { mutableStateOf("") }
     var additionalInfo    by remember { mutableStateOf("") }
 
-    // Calendar state — week of Jan 2025 starting Sun 1
-    val weekDates = remember {
-        val base = LocalDate.of(2025, 1, 1)
-        val sunday = base.minusDays(base.dayOfWeek.value.toLong() % 7)
-        (0..6).map { sunday.plusDays(it.toLong()) }
+    val today = remember { LocalDate.now() }
+    var selectedDate by remember { mutableStateOf(today) }
+
+    var monthLabel by remember {
+        mutableStateOf(today.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH)))
     }
-    var selectedDate by remember { mutableStateOf(LocalDate.of(2025, 1, 3)) }
-    var monthLabel   by remember { mutableStateOf("January 2025") }
+
+    // Calendar state — week of Jan 2025 starting Sun 1
+    val weekDates by remember {
+        derivedStateOf {
+            val daysSinceSunday = selectedDate.dayOfWeek.value % 7
+            val sunday = selectedDate.minusDays(daysSinceSunday.toLong())
+            (0..6).map { sunday.plusDays(it.toLong()) }
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize().background(OffWhite)) {
 
@@ -181,7 +189,15 @@ fun NonEmergencyScreen(
                             Icons.Filled.KeyboardArrowLeft,
                             contentDescription = "Prev month",
                             tint               = TextSecondary,
-                            modifier           = Modifier.size(20.dp).clickable { }
+                            modifier           = Modifier
+                                .size(20.dp)
+                                .clickable {
+                                    val newSelected = selectedDate.minusWeeks(1)
+                                    selectedDate = newSelected
+                                    monthLabel = newSelected.format(
+                                        DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH)
+                                    )
+                                }
                         )
                         Text(
                             text     = monthLabel,
@@ -192,7 +208,15 @@ fun NonEmergencyScreen(
                             Icons.Filled.KeyboardArrowRight,
                             contentDescription = "Next month",
                             tint               = TextSecondary,
-                            modifier           = Modifier.size(20.dp).clickable { }
+                            modifier           = Modifier
+                                .size(20.dp)
+                                .clickable {
+                                    val newSelected = selectedDate.plusWeeks(1)
+                                    selectedDate = newSelected
+                                    monthLabel = newSelected.format(
+                                        DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH)
+                                    )
+                                }
                         )
                     }
                 }

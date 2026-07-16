@@ -92,7 +92,7 @@ fun AmbulanceNavGraph(
 
         composable(route = Screen.HistoryScreen.route) {
             HistoryScreen(
-                onNavigateToDetail = { navController.navigate(Screen.DetailHistory.route) }
+
             )
         }
 

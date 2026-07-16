@@ -36,13 +36,27 @@ import com.example.ambulanceapp.ui.theme.TextSecondary
 @Composable
 fun SignUpScreen(
     onBackClick: () -> Unit = {},
-    onSignUpClick: () -> Unit = {}
+    onSignUpClick: (username: String, email: String, password: String) -> Unit = { _, _, _ -> },
 ) {
     var username        by remember { mutableStateOf("") }
     var email           by remember { mutableStateOf("") }
     var password        by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var termsAccepted   by remember { mutableStateOf(true) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    fun handleSignUp() {
+        errorMessage = when {
+            username.isBlank() -> "Username tidak boleh kosong"
+            email.isBlank() -> "Email tidak boleh kosong"
+            password.isBlank() -> "Password tidak boleh kosong"
+            password.length < 6 -> "Password minimal 6 karakter"
+            else -> null
+        }
+        if (errorMessage == null) {
+            onSignUpClick(username, email, password)
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -86,7 +100,10 @@ fun SignUpScreen(
             // Username field
             SignUpInputField(
                 value = username,
-                onValueChange = { username = it },
+                onValueChange = {
+                    username = it
+                    errorMessage = null
+                                },
                 placeholder = "Username",
                 leadingIcon = {
                     IconCircle {
@@ -105,7 +122,10 @@ fun SignUpScreen(
             // E-mail field
             SignUpInputField(
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = {
+                    email = it
+                    errorMessage = null
+                                },
                 placeholder = "E-mail",
                 leadingIcon = {
                     IconCircle {
@@ -125,7 +145,10 @@ fun SignUpScreen(
             // Password field
             SignUpInputField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {
+                    password = it
+                    errorMessage = null
+                                },
                 placeholder = "Password",
                 leadingIcon = {
                     IconCircle {
@@ -152,6 +175,24 @@ fun SignUpScreen(
                     VisualTransformation.None else PasswordVisualTransformation(),
                 keyboardType = KeyboardType.Password
             )
+
+            // Pesan error
+            if (errorMessage != null) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Text(
+                        text = errorMessage ?: "",
+                        color = Color(0xFFDC2626),
+                        fontSize = 12.sp,
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -183,7 +224,7 @@ fun SignUpScreen(
 
             // Sign Up button
             Button(
-                onClick = onSignUpClick,
+                onClick = { handleSignUp() },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(54.dp),

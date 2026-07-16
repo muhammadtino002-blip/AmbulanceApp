@@ -47,7 +47,7 @@ fun AmbulanceNavGraph(
 
         composable(route = Screen.SignUp.route) {
             SignUpScreen(
-                onSignUpClick = {
+                onSignUpClick = { username, email, password ->
                     navController.navigate(Screen.Dashboard.route)
                 },
                 onBackClick = {

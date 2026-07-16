@@ -37,6 +37,10 @@ import com.example.ambulanceapp.ui.theme.TextSecondary
 import com.example.ambulanceapp.ui.theme.CardBg
 import com.example.ambulanceapp.ui.theme.IconBg
 import com.example.ambulanceapp.ui.theme.OverlayDark
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import com.example.ambulanceapp.R
 
 // Data Models
 data class ServiceCategory(
@@ -47,7 +51,8 @@ data class ServiceCategory(
 
 data class NewsItem(
     val title: String,
-    val source: String
+    val source: String,
+    val images: Int
 )
 
 // ROOT SCREEN
@@ -92,15 +97,13 @@ fun AmbulanceDashboardScreen(
     val latestNews = listOf(
         NewsItem(
             "Bantu Palestina, BAZNAS Bersama Dubes RI di Mesir Salurkan 5 Unit Ambulans dari Tempo Scan",
-            "Baznas"
+            "Baznas",
+            images = R.drawable.news_1
         ),
         NewsItem(
             "Pecah Ban, Ambulans Jenazah Tabrak Truk di Jembrana Bali",
-            "CNN Indonesia"
-        ),
-        NewsItem(
-            "Kemenkes Tambah 200 Unit Ambulans untuk Puskesmas Terpencil",
-            "Kompas"
+            "CNN Indonesia",
+            images = R.drawable.news_2
         )
     )
 
@@ -118,7 +121,7 @@ fun AmbulanceDashboardScreen(
         SectionHeader("Latest News", onViewAll = {})
         Spacer(Modifier.height(12.dp))
         LatestNewsRow(latestNews)
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(120.dp))
     }
 
     // Dialog untuk Corpse
@@ -126,7 +129,7 @@ fun AmbulanceDashboardScreen(
         AlertDialog(
             onDismissRequest = { showCorpseDialog = false },
             title = { Text("Corpse") },
-            text = { Text("maaf corpse belum tersedia") },
+            text = { Text(text = stringResource(R.string.fitur_optimalization)) },
             confirmButton = {
                 TextButton(onClick = { showCorpseDialog = false }) {
                     Text("OK")
@@ -140,7 +143,7 @@ fun AmbulanceDashboardScreen(
         AlertDialog(
             onDismissRequest = { showScheduleDialog = false },
             title = { Text("Schedule") },
-            text = { Text("maaf schedule belum tersedia") },
+            text = { Text(text = stringResource(R.string.fitur_optimalization)) },
             confirmButton = {
                 TextButton(onClick = { showScheduleDialog = false }) {
                     Text("OK")
@@ -165,6 +168,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
             .statusBarsPadding()
     ) {
         Column {
+
             // Top bar
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -255,6 +259,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
                         modifier = Modifier.padding(top = 4.dp)
                     )
                     Spacer(Modifier.height(8.dp))
+
                     // TAP HERE navigates to Non-Emergency
                     Box(
                         modifier = Modifier
@@ -281,7 +286,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
                 ) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Image(
-                            painter = painterResource(com.example.ambulanceapp.R.drawable.ambulans),
+                            painter = painterResource(R.drawable.ambulans),
                             contentDescription = null
                         )
                     }
@@ -293,7 +298,7 @@ private fun HeroHeader(onTapHere: () -> Unit = {}) {
         AlertDialog(
             onDismissRequest = { showNotificationDialog = false },
             title = { Text("Notifikasi") },
-            text = { Text("Belum Ada Notifikasi") },
+            text = { Text(text = stringResource(R.string.fitur_optimalization)) },
             confirmButton = {
                 TextButton(onClick = { showNotificationDialog = false }) {
                     Text("OK")
@@ -417,6 +422,7 @@ private fun LatestNewsRow(newsList: List<NewsItem>) {
 
 @Composable
 private fun NewsCard(news: NewsItem) {
+
     Box(
         modifier = Modifier
             .width(230.dp)
@@ -424,10 +430,18 @@ private fun NewsCard(news: NewsItem) {
             .clip(RoundedCornerShape(16.dp))
             .clickable { }
     ) {
+
         Box(
             modifier = Modifier.fillMaxSize()
-                .background(Brush.linearGradient(colors = listOf(NavyPrimary, NavySecondary)))
-        )
+        ) {
+            Image(
+                painter = painterResource(news.images),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
         Box(
             modifier = Modifier
                 .fillMaxWidth().fillMaxHeight(0.55f).align(Alignment.BottomCenter)

@@ -1,5 +1,6 @@
 package com.example.ambulanceapp.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -20,11 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.R
 import com.example.ambulanceapp.ui.theme.Montserrat
 import com.example.ambulanceapp.ui.theme.NavyPrimary
 import com.example.ambulanceapp.ui.theme.White
@@ -497,22 +500,11 @@ private fun MapPlaceholderView() {
             .fillMaxSize()
             .background(Color(0xFFE8EDF3))
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp)
-                .clip(RoundedCornerShape(12.dp))
-                .background(MapBg),
-            contentAlignment = Alignment.Center
-        ) {
-            
-            Text(
-                text = "Map View",
-                color = Color.Gray,
-                fontFamily = Montserrat,
-                fontSize = 13.sp
-            )
-        }
+        Image(
+            painter = painterResource(R.drawable.maps),
+            contentDescription = "Maps",
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
 

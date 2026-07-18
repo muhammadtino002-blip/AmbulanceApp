@@ -2,12 +2,14 @@ package com.example.ambulanceapp.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.ambulanceapp.ui.screens.DetailHistoryScreen
+import androidx.navigation.navArgument
+import com.example.ambulanceapp.data.sampleOrders
 import com.example.ambulanceapp.ui.screens.EmergencyScreen
-import com.example.ambulanceapp.ui.screens.HistoryScreen
+import com.example.ambulanceapp.ui.screens.HistoryDetailScreen
 import com.example.ambulanceapp.ui.screens.MainScreen
 import com.example.ambulanceapp.ui.screens.NonEmergencyScreen
 import com.example.ambulanceapp.ui.screens.OrderSuccessScreen
@@ -63,6 +65,9 @@ fun AmbulanceNavGraph(
                 },
                 onNavigateToEmergency = {
                     navController.navigate(Screen.Emergency.route)
+                },
+                onNavigateToHistoryDetail = { order ->
+                    navController.navigate(Screen.HistoryDetail.createRoute(order.id))
                 }
             )
         }
@@ -90,16 +95,20 @@ fun AmbulanceNavGraph(
             )
         }
 
-        composable(route = Screen.HistoryScreen.route) {
-            HistoryScreen(
-
+        composable(
+            route = Screen.HistoryDetail.route,
+            arguments = listOf(
+                navArgument("orderId") { type = NavType.StringType }
             )
-        }
-
-        composable(route = Screen.DetailHistory.route) {
-            DetailHistoryScreen(
-                onBackClick = { navController.popBackStack() }
-            )
+        ) { backStackEntry ->
+            val orderId = backStackEntry.arguments?.getString("orderId") ?: ""
+            val order = sampleOrders.find { it.id == orderId }
+            if (order != null) {
+                HistoryDetailScreen(
+                    order  = order,
+                    onBack = { navController.popBackStack() }
+                )
+            }
         }
     }
 }
@@ -112,6 +121,7 @@ sealed class Screen(val route: String) {
     object NonEmergency  : Screen("non_emergency")
     object Emergency     : Screen("emergency")
     object OrderSuccsess : Screen("order_succsess")
-    object HistoryScreen : Screen("history_screen")
-    object DetailHistory : Screen("detail_history")
+    object HistoryDetail  : Screen("history_detail/{orderId}") {
+        fun createRoute(orderId: String) = "history_detail/$orderId"
+    }
 }

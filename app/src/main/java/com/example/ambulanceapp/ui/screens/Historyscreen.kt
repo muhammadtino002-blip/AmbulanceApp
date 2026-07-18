@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.data.AmbulanceOrder
+import com.example.ambulanceapp.data.sampleOrders
 import com.example.ambulanceapp.ui.theme.Montserrat
 
 // Color tokens
@@ -30,6 +32,7 @@ private val CardBg        = Color(0xFFFFFFFF)
 
 // Data model
 data class OrderHistoryItem(
+    val orderId: String,
     val type: String,
     val driver: String,
     val dateTime: String,
@@ -39,20 +42,22 @@ data class OrderHistoryItem(
 
 // Screen
 @Composable
-fun HistoryScreen() {
+fun HistoryScreen( onOrderClick: (AmbulanceOrder) -> Unit = {}) {
 
     val thisMonthItems = listOf(
         OrderHistoryItem(
+            orderId  = "#AMB-0042",
             type = "Non-Emergency",
             driver = "Maulana Malik",
-            dateTime = "27 June 2026 - 12:39",
+            dateTime = "27 June 2026 - 09:30",
             icon = Icons.Outlined.MedicalServices,
             onClick = {}
         ),
         OrderHistoryItem(
+            orderId  = "#AMB-0039",
             type = "Corpse",
             driver = "Supriyadi",
-            dateTime = "8 June 2026 - 07:12",
+            dateTime = "8 June 2026 - 11:45",
             icon = Icons.Outlined.AirlineSeatFlat,
             onClick = {}
         )
@@ -60,9 +65,10 @@ fun HistoryScreen() {
 
     val mayItems = listOf(
         OrderHistoryItem(
+            orderId  = "#AMB-0038",
             type = "Emergency",
             driver = "Joko Anwar",
-            dateTime = "9 May 2026 - 17:02",
+            dateTime = "9 May 2026 - 22:05",
             icon = Icons.Outlined.Emergency,
             onClick = {}
         )
@@ -94,7 +100,13 @@ fun HistoryScreen() {
         SectionLabel("This Month")
         Spacer(modifier = Modifier.height(12.dp))
         thisMonthItems.forEach { item ->
-            HistoryCard(item = item, onClick = {  })
+            HistoryCard(
+                item = item,
+                onClick = {
+                    val order = sampleOrders.find { it.id == item.orderId }
+                    if (order != null) onOrderClick(order)
+                }
+            )
             Spacer(modifier = Modifier.height(12.dp))
         }
 
@@ -104,7 +116,13 @@ fun HistoryScreen() {
         SectionLabel("May 2026")
         Spacer(modifier = Modifier.height(12.dp))
         mayItems.forEach { item ->
-            HistoryCard(item = item, onClick = {  })
+            HistoryCard(
+                item = item,
+                onClick = {
+                    val order = sampleOrders.find { it.id == item.orderId }
+                    if (order != null) onOrderClick(order)
+                }
+            )
             Spacer(modifier = Modifier.height(12.dp))
         }
 
@@ -134,7 +152,7 @@ private fun HistoryCard(
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = CardBg),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
-        onClick = { onClick },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth(),
     ) {

@@ -25,14 +25,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.ambulanceapp.data.AmbulanceOrder
 import com.example.ambulanceapp.ui.components.UnderOptimizationDialog
-import com.example.ambulanceapp.ui.theme.NavyPrimary
 import com.example.ambulanceapp.ui.theme.White
-import com.example.ambulanceapp.ui.theme.TextSecondary
 
 // Bottom Nav Items
 private data class BottomNavItem(
@@ -51,7 +48,8 @@ private val bottomNavItems = listOf(
 @Composable
 fun MainScreen(
     onNavigateToNonEmergency: () -> Unit = {},
-    onNavigateToEmergency: () -> Unit = {}
+    onNavigateToEmergency: () -> Unit = {},
+    onNavigateToHistoryDetail: (AmbulanceOrder) -> Unit = {}
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showOptimizationDialog by remember { mutableStateOf(false) }
@@ -86,7 +84,7 @@ fun MainScreen(
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,
                 )
-                1 -> HistoryScreen()
+                1 -> HistoryScreen(onOrderClick = onNavigateToHistoryDetail)
                 else -> AmbulanceDashboardScreen (
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,

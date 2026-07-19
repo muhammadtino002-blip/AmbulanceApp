@@ -2,6 +2,7 @@ package com.example.ambulanceapp.ui.screens
 
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.ui.theme.Montserrat
 import com.example.ambulanceapp.ui.theme.NavyPrimary
+import com.example.ambulanceapp.ui.theme.ScreenBg
 import com.example.ambulanceapp.ui.theme.TextPrimary
 import com.example.ambulanceapp.ui.theme.TextSecondary
 
@@ -35,6 +37,7 @@ fun OrderSuccessScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(ScreenBg)
                 .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

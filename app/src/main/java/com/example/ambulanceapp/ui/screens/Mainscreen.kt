@@ -42,14 +42,15 @@ private val bottomNavItems = listOf(
     BottomNavItem(Icons.Outlined.Home,       "Home"),
     BottomNavItem(Icons.Outlined.Schedule, "History"),
     BottomNavItem(Icons.Outlined.Chat,     "Messages", isPlaceholder = true),
-    BottomNavItem(Icons.Outlined.Person,   "Profile", isPlaceholder = true)
+    BottomNavItem(Icons.Outlined.Person,   "Profile")
 )
 
 @Composable
 fun MainScreen(
     onNavigateToNonEmergency: () -> Unit = {},
     onNavigateToEmergency: () -> Unit = {},
-    onNavigateToHistoryDetail: (AmbulanceOrder) -> Unit = {}
+    onNavigateToHistoryDetail: (AmbulanceOrder) -> Unit = {},
+    onLogOut: () -> Unit = {}
 ) {
     var selectedTab by remember { mutableIntStateOf(0) }
     var showOptimizationDialog by remember { mutableStateOf(false) }
@@ -85,6 +86,7 @@ fun MainScreen(
                     onNavigateToNonEmergency = onNavigateToNonEmergency,
                 )
                 1 -> HistoryScreen(onOrderClick = onNavigateToHistoryDetail)
+                3 -> ProfileScreen(onLogOut = onLogOut)
                 else -> AmbulanceDashboardScreen (
                     onNavigateToEmergency = onNavigateToEmergency,
                     onNavigateToNonEmergency = onNavigateToNonEmergency,

@@ -55,7 +55,7 @@ fun HistoryDetailScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(OffWhite)
+            .background(ScreenBg)
     ) {
         // Top App Bar
         Box(

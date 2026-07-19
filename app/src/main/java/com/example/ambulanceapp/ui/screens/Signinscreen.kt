@@ -1,6 +1,7 @@
 package com.example.ambulanceapp.ui.screens
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -33,6 +34,7 @@ import com.example.ambulanceapp.ui.theme.TextPrimary
 import com.example.ambulanceapp.ui.theme.TextSecondary
 import com.example.ambulanceapp.ui.theme.HintGray
 import com.example.ambulanceapp.ui.theme.FieldBg
+import com.example.ambulanceapp.ui.theme.ScreenBg
 
 // Screen
 @Composable
@@ -59,8 +61,9 @@ fun SignInScreen(
     }
 
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.White
+        modifier = Modifier
+            .fillMaxSize()
+            .background(ScreenBg)
     ) {
         Column(
             modifier = Modifier

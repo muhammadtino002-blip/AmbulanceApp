@@ -36,9 +36,8 @@ import com.example.ambulanceapp.ui.theme.TextPrimary
 import com.example.ambulanceapp.ui.theme.TextSecondary
 import com.example.ambulanceapp.ui.theme.HintGray
 import com.example.ambulanceapp.ui.theme.BorderColor
-import com.example.ambulanceapp.ui.theme.MapBg
+import com.example.ambulanceapp.ui.theme.ScreenBg
 import com.example.ambulanceapp.ui.theme.UnselectedBg
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
@@ -85,7 +84,11 @@ fun NonEmergencyScreen(
 
     Box(modifier = Modifier.fillMaxSize().background(OffWhite)) {
 
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(ScreenBg)
+        ) {
 
             // Map Header
             Box(

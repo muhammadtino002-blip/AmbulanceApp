@@ -68,6 +68,11 @@ fun AmbulanceNavGraph(
                 },
                 onNavigateToHistoryDetail = { order ->
                     navController.navigate(Screen.HistoryDetail.createRoute(order.id))
+                },
+                onLogOut = {
+                    navController.navigate(Screen.SignIn.route) {
+                        popUpTo(Screen.Dashboard.route) { inclusive = true }
+                    }
                 }
             )
         }

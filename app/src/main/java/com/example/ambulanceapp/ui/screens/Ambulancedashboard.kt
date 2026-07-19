@@ -41,6 +41,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import com.example.ambulanceapp.R
+import com.example.ambulanceapp.ui.theme.ScreenBg
 
 // Data Models
 data class ServiceCategory(
@@ -111,6 +112,7 @@ fun AmbulanceDashboardScreen(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .background(ScreenBg)
     ) {
         HeroHeader(onTapHere = onNavigateToNonEmergency)
         Spacer(Modifier.height(24.dp))

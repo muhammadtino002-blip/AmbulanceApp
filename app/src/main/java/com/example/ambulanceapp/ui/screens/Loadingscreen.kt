@@ -13,6 +13,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.ambulanceapp.R
+import com.example.ambulanceapp.ui.theme.ScreenBg
+import com.example.ambulanceapp.ui.theme.White
 import kotlinx.coroutines.delay
 
 // Splash Screen
@@ -45,7 +47,7 @@ fun SplashScreen(
     Box(
         modifier          = Modifier
             .fillMaxSize()
-            .background(Color.White),
+            .background(White),
         contentAlignment  = Alignment.Center
     ) {
         Image(

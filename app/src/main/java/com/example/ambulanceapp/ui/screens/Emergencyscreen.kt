@@ -37,13 +37,13 @@ import com.example.ambulanceapp.ui.theme.NavyPrimary
 import com.example.ambulanceapp.ui.theme.TextPrimary
 import com.example.ambulanceapp.ui.theme.TextSecondary
 import com.example.ambulanceapp.ui.theme.CardBg
-import com.example.ambulanceapp.ui.theme.MapBg
 import com.example.ambulanceapp.ui.theme.White
 import com.example.ambulanceapp.ui.theme.Red
 import com.example.ambulanceapp.ui.theme.RedDark
 import com.example.ambulanceapp.ui.theme.RedLight
 import com.example.ambulanceapp.ui.theme.OffWhite
 import com.example.ambulanceapp.ui.theme.BorderColor
+import com.example.ambulanceapp.ui.theme.ScreenBg
 
 // Data
 private val statusOptions = listOf("Chest Pain", "Difficulty Breathing", "Injury", "Other")
@@ -72,6 +72,7 @@ fun EmergencyScreen(onBack: () -> Unit = {}) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .background(ScreenBg)
                 .verticalScroll(rememberScrollState())
         ) {
 

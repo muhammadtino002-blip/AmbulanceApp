@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.ambulanceapp.data.AmbulanceOrder
 import com.example.ambulanceapp.data.sampleOrders
 import com.example.ambulanceapp.ui.theme.Montserrat
+import com.example.ambulanceapp.ui.theme.ScreenBg
 
 // Color tokens
 private val NavyDark      = Color(0xFF122850)
@@ -77,6 +78,7 @@ fun HistoryScreen( onOrderClick: (AmbulanceOrder) -> Unit = {}) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(ScreenBg)
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp)
             .statusBarsPadding(),
